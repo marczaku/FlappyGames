@@ -6,6 +6,13 @@ public class RotatingCube : MonoBehaviour
     {
         Debug.Log("Hello World!");
     }
+    
+#if UNITY_STANDALONE_OSX
+    void Awake()
+    {
+        Destroy(this.gameObject);
+    }
+#endif
 
     void FixedUpdate()
     {
