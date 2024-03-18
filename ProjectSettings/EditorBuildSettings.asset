@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FlappyBird.unity
     guid: 89268e65bb7034944acd3082822bc3c2
+  - enabled: 1
+    path: Assets/Scenes/GravityScene.unity
+    guid: 1fd240e03184847c795f3f50ebffebc8
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 212bd2a328b5a49f180e2999c417d794, type: 2}
