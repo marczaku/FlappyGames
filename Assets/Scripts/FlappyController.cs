@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class FlappyController : MonoBehaviour
@@ -8,6 +9,9 @@ public class FlappyController : MonoBehaviour
     public float flapPower = 3;
     private Rigidbody2D _rb;
     private bool _isDead;
+    public int score;
+
+    public UnityEvent<int> ScoreChange;
     
     void Start()
     {
@@ -32,11 +36,38 @@ public class FlappyController : MonoBehaviour
                 _rb.simulated = true;
             }
         }
+        UpdateRotation();
+    }
+
+    void UpdateRotation()
+    {
+        float targetRotation = 0f;
+        if (_rb.velocity.y > 0.2f)
+        {
+            targetRotation = 30f;
+        }
+        else if (_rb.velocity.y < -1.5f)
+        {
+            targetRotation = -90f;
+        } else if (_rb.velocity.y < -0.2f)
+        {
+            targetRotation = -30f;
+        }
+        Debug.Log(_rb.velocity.y);
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation, 
+            Quaternion.Euler(0f, 0f, targetRotation),
+            Time.deltaTime * 8);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         StartCoroutine(Co_OnDeath());
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        ScoreChange.Invoke(++score);
     }
 
     IEnumerator Co_OnDeath()
