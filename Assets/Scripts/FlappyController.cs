@@ -42,6 +42,7 @@ public class FlappyController : MonoBehaviour
     IEnumerator Co_OnDeath()
     {
         _isDead = true;
+        gameObject.layer = LayerMask.NameToLayer("GameOver");
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
