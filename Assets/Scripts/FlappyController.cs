@@ -58,6 +58,13 @@ public class FlappyController : MonoBehaviour
             transform.rotation, 
             Quaternion.Euler(0f, 0f, targetRotation),
             Time.deltaTime * 8);
+        if (targetRotation > 0)
+        {
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation, 
+                Quaternion.Euler(0f, 0f, targetRotation),
+                Time.deltaTime * 8);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
